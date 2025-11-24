@@ -1,0 +1,41 @@
+<div class="bg-white p-4 rounded-md shadow-sm">
+  <div class="flex flex-col md:flex-row md:items-center md:gap-4">
+    <div class="flex-1">
+      <label class="sr-only">Search</label>
+      <input
+        type="search"
+        [formControl]="searchControl"
+        placeholder="Search products, sku..."
+        class="w-full border rounded px-3 py-2"
+      />
+    </div>
+
+    <div class="flex items-center gap-3 mt-3 md:mt-0">
+      <select
+        class="border rounded px-3 py-2"
+        [(ngModel)]="category"
+        (ngModelChange)="emitChange()"
+      >
+        <option value="">All categories</option>
+        <option *ngFor="let c of categories" [value]="c">{{ c }}</option>
+      </select>
+
+      <select class="border rounded px-3 py-2" [(ngModel)]="stock" (ngModelChange)="emitChange()">
+        <option value="">All stock</option>
+        <option value="in">In stock</option>
+        <option value="out">Out of stock</option>
+        <option value="low">Low stock (&lt;10)</option>
+      </select>
+
+      <select class="border rounded px-3 py-2" [(ngModel)]="sort" (ngModelChange)="emitChange()">
+        <option value="">Sort</option>
+        <option value="price_asc">Price: Low → High</option>
+        <option value="price_desc">Price: High → Low</option>
+        <option value="name_asc">Name: A → Z</option>
+        <option value="name_desc">Name: Z → A</option>
+      </select>
+
+      <button class="px-3 py-2 border rounded" (click)="reset()">Reset</button>
+    </div>
+  </div>
+</div>

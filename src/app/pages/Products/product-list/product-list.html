@@ -1,0 +1,40 @@
+<section class="p-4 md:p-6">
+  <div class="mb-4">
+    <Product-Filter [categories]="categories" (change)="onFilterChange($event)" />
+  </div>
+
+  <div *ngIf="loading" class="py-12 flex justify-center">
+    <div class="text-sm text-gray-500">Loading products...</div>
+  </div>
+
+  <div *ngIf="!loading && filteredProducts.length === 0" class="py-12 text-center text-gray-500">
+    No products found.
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <Product-Card *ngFor="let p of pagedProducts" [product]="p"></Product-Card>
+  </div>
+
+  <div class="mt-6 flex items-center justify-between">
+    <div class="text-sm text-gray-600">
+      Showing {{ startIndex + 1 }} - {{ endIndex }} of {{ filteredProducts.length }}
+    </div>
+    <div class="flex items-center gap-2">
+      <button
+        class="px-3 py-1 border rounded disabled:opacity-50"
+        (click)="prevPage()"
+        [disabled]="page === 1"
+      >
+        Prev
+      </button>
+      <div class="px-3 py-1 border rounded">{{ page }} / {{ totalPages }}</div>
+      <button
+        class="px-3 py-1 border rounded disabled:opacity-50"
+        (click)="nextPage()"
+        [disabled]="page === totalPages"
+      >
+        Next
+      </button>
+    </div>
+  </div>
+</section>

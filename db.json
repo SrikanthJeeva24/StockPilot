@@ -1,0 +1,52 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Apple iPhone 15",
+      "sku": "IP15-BLK-128",
+      "price": 79999,
+      "stock": 50,
+      "category": "Mobile"
+    },
+    {
+      "id": 2,
+      "name": "Sony WH-1000XM5",
+      "sku": "SONY-XM5",
+      "price": 29999,
+      "stock": 35,
+      "category": "Audio"
+    }
+  ],
+  "orders": [
+    {
+      "id": 101,
+      "orderNumber": "ORD-2024-001",
+      "customerName": "John Doe",
+      "items": [
+        {
+          "productId": 1,
+          "qty": 2,
+          "price": 79999
+        }
+      ],
+      "total": 159998,
+      "status": "Pending",
+      "date": "2025-01-10"
+    },
+    {
+      "id": 102,
+      "orderNumber": "ORD-2024-002",
+      "customerName": "Kavi",
+      "items": [
+        {
+          "productId": 2,
+          "qty": 1,
+          "price": 29999
+        }
+      ],
+      "total": 29999,
+      "status": "Shipped",
+      "date": "2025-01-11"
+    }
+  ]
+}
