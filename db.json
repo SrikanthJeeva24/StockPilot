@@ -6,7 +6,8 @@
       "sku": "IP15-BLK-128",
       "price": 79999,
       "stock": 50,
-      "category": "Mobile"
+      "category": "Mobile",
+      "image": "https://images.unsplash.com/photo-1695048137222-7d00fff9dcc3?auto=format&fit=crop&w=800&q=80"
     },
     {
       "id": 2,
@@ -14,7 +15,81 @@
       "sku": "SONY-XM5",
       "price": 29999,
       "stock": 35,
-      "category": "Audio"
+      "category": "Audio",
+      "image": "https://images.unsplash.com/photo-1602679480224-5df3800f9a6b?auto=format&fit=crop&w=800&q=80"
+    },
+
+    {
+      "id": 3,
+      "name": "Samsung Galaxy S23 Ultra",
+      "sku": "SGS23U-256-GRN",
+      "price": 124999,
+      "stock": 40,
+      "category": "Mobile",
+      "image": "https://images.unsplash.com/photo-1675876781590-43195f1a639a?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": 4,
+      "name": "Dell XPS 15",
+      "sku": "DELL-XPS15-2023",
+      "price": 185000,
+      "stock": 15,
+      "category": "Laptop",
+      "image": "https://images.unsplash.com/photo-1527443224154-d8422010ea2e?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": 5,
+      "name": "Apple AirPods Pro (2nd Gen)",
+      "sku": "APP-AP-PRO2",
+      "price": 24999,
+      "stock": 60,
+      "category": "Audio",
+      "image": "https://images.unsplash.com/photo-1588423771073-b8903fbb85b5?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": 6,
+      "name": "Logitech MX Master 3S",
+      "sku": "LOGI-MX3S",
+      "price": 10499,
+      "stock": 48,
+      "category": "Accessories",
+      "image": "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": 7,
+      "name": "Google Pixel 8",
+      "sku": "PIX8-128-BLK",
+      "price": 75999,
+      "stock": 28,
+      "category": "Mobile",
+      "image": "https://images.unsplash.com/photo-1696264865806-0bcb7a4182a3?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": 8,
+      "name": "Apple MacBook Air M2",
+      "sku": "MBA-M2-13-256",
+      "price": 114999,
+      "stock": 22,
+      "category": "Laptop",
+      "image": "https://images.unsplash.com/photo-1587614382346-4ec70e388b28?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": 9,
+      "name": "Sony PlayStation 5",
+      "sku": "PS5-DISC-ED",
+      "price": 55999,
+      "stock": 18,
+      "category": "Gaming",
+      "image": "https://images.unsplash.com/photo-1606813907291-d86efa9b83a2?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": 10,
+      "name": "JBL Charge 5 Portable Speaker",
+      "sku": "JBL-CH5-BLK",
+      "price": 14999,
+      "stock": 72,
+      "category": "Audio",
+      "image": "https://images.unsplash.com/photo-1592890288564-76628d7f3a6a?auto=format&fit=crop&w=800&q=80"
     }
   ],
   "orders": [

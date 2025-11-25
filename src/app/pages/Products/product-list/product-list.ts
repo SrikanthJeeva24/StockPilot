@@ -6,10 +6,18 @@ import { ProductCard } from '../../../shared/components/product-card/product-car
 import { catchError, of, finalize } from 'rxjs';
 import { IProduct } from '../../../shared/interfaces/IProduct';
 import { ProductService } from '../../../shared/services/product';
+import { RouterLink, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, ProductCard, ProductFilter],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ProductCard,
+    ProductFilter,
+    RouterModule,
+  ],
   templateUrl: './product-list.html',
   styleUrl: './product-list.css',
 })
