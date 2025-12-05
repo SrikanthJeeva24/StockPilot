@@ -1,40 +1,39 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environments';
 import { IProduct } from '../interfaces/IProduct';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
-  private base = 'http://localhost:3000/products';
+  private base = environment.apiUrl + '/products';
 
-  constructor(private http: HttpClient) {}
+  constructor(private readonly http: HttpClient) {}
 
-  // Fetch all IProducts (client-side filtering option)
+  // GET ALL PRODUCTS
   getAll(): Observable<IProduct[]> {
-    return this.http.get<IProduct[]>(this.base);
+    return this.http.get<IProduct[]>(`${this.base}`);
   }
 
-  // Server-side filtered fetch example (uncomment to use)
-  // getAllServerSide(params: any): Observable<IProduct[]> {
-  //   // build query string according to json-server conventions (e.g. ?category=Mobile&_sort=price&_order=asc)
-  //   return this.http.get<IProduct[]>(this.base, { params });
-  // }
-
-  getById(id: number) {
+  // GET PRODUCT BY UUID
+  getById(id: string): Observable<IProduct> {
     return this.http.get<IProduct>(`${this.base}/${id}`);
   }
 
-  create(Product: Partial<IProduct>) {
-    return this.http.post<IProduct>(this.base, Product);
+  // CREATE PRODUCT
+  create(product: Partial<IProduct>): Observable<IProduct> {
+    return this.http.post<IProduct>(`${this.base}/create`, product);
   }
 
-  update(id: number, body: Partial<IProduct>) {
-    return this.http.put<IProduct>(`${this.base}/${id}`, body);
+  // UPDATE PRODUCT
+  update(id: string, body: Partial<IProduct>): Observable<IProduct> {
+    return this.http.post<IProduct>(`${this.base}/updateproduct/${id}`, body);
   }
 
-  delete(id: number) {
-    return this.http.delete(`${this.base}/${id}`);
+  // DELETE PRODUCT
+  delete(id: string): Observable<any> {
+    return this.http.delete(`${this.base}/deleteproduct/${id}`);
   }
 }

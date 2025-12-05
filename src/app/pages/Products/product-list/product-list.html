@@ -2,14 +2,9 @@
   <div class="px-4 md:px-8 py-5 flex items-center justify-between">
     <h2 class="text-2xl font-semibold text-gray-900 tracking-tight flex items-center gap-3">
       Products
-      <span class="text-gray-500 text-md font-normal">({{ filteredProducts.length }})</span>
+      <span class="text-gray-500 text-md font-normal"> ({{ products.length }}) </span>
     </h2>
-    <!-- <button
-      [routerLink]="['/products/add']"
-      class="px-4 py-2.5 rounded-xl bg-white text-black text-sm font-medium shadow-sm hover:bg-gray-300 hover:font-bold active:scale-95 transition-transform"
-    >
-      + Add New Product
-    </button> -->
+
     <button
       class="px-5 py-2.5 rounded-xl bg-gray-900 text-white text-sm font-medium shadow-sm hover:bg-gray-800 active:scale-95 transition"
       [routerLink]="['/products/add']"
@@ -20,9 +15,6 @@
 </header>
 
 <section class="p-1 md:p-2 space-y-8 mx-auto">
-  <!-- Filter Box -->
-  <Product-Filter [categories]="categories" (change)="onFilterChange($event)" />
-
   <!-- Loading State -->
   <div *ngIf="loading" class="py-20 flex flex-col items-center gap-3">
     <div
@@ -33,63 +25,21 @@
 
   <!-- Empty State -->
   <div
-    *ngIf="!loading && filteredProducts.length === 0"
+    *ngIf="!loading && products.length === 0"
     class="py-24 text-center flex flex-col items-center gap-3 text-gray-500"
   >
     <div class="text-6xl opacity-80">📦</div>
     <p class="text-xl font-semibold text-gray-800">No Products Found</p>
-    <p class="text-sm text-gray-400">Try adjusting your filters or search.</p>
+    <p class="text-sm text-gray-400">Try adding a new product.</p>
   </div>
 
-  <!-- Products Grid -->
-  <div
-    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-8 p-2"
-    *ngIf="!loading && filteredProducts.length > 0"
+  <!-- Table -->
+  <dynamicTable
+    *ngIf="!loading && products.length > 0"
+    [columns]="columns"
+    [data]="products"
+    (sort)="handleSort($event)"
+    (action)="handleAction($event)"
   >
-    <Product-Card
-      *ngFor="let p of pagedProducts"
-      [product]="p"
-      class="transform transition duration-300 hover:scale-[1.015] hover:shadow-lg hover:-translate-y-1"
-    >
-    </Product-Card>
-  </div>
-
-  <!-- Pagination -->
-  <div
-    *ngIf="filteredProducts.length > 0"
-    class="mt-10 flex flex-col sm:flex-row items-center justify-between gap-6"
-  >
-    <div class="text-sm text-gray-600">
-      Showing
-      <span class="font-semibold text-gray-900">{{ startIndex + 1 }}</span>
-      –
-      <span class="font-semibold text-gray-900">{{ endIndex }}</span>
-      of
-      <span class="font-bold text-gray-900">{{ filteredProducts.length }}</span>
-    </div>
-
-    <div class="flex items-center gap-3">
-      <button
-        class="px-5 py-2.5 rounded-xl border border-gray-300 text-gray-700 bg-white shadow-sm hover:bg-gray-100 disabled:opacity-40 disabled:cursor-not-allowed transition"
-        (click)="prevPage()"
-        [disabled]="page === 1"
-      >
-        Previous
-      </button>
-
-      <div class="px-6 py-2.5 rounded-xl border border-gray-200 bg-gray-50 shadow-sm text-gray-700">
-        <span class="font-semibold">{{ page }}</span>
-        <span class="text-gray-400">/</span>
-        <span class="font-medium text-gray-500">{{ totalPages }}</span>
-      </div>
-
-      <button
-        class="px-5 py-2.5 rounded-xl border border-gray-300 text-gray-700 bg-white shadow-sm hover:bg-gray-100 disabled:opacity-40 disabled:cursor-not-allowed transition"
-        (click)="nextPage()"
-        [disabled]="page === totalPages"
-      >
-        Next
-      </button>
-    </div>
-  </div>
+  </dynamicTable>
 </section>

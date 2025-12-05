@@ -7,7 +7,7 @@
       "price": 79999,
       "stock": 50,
       "category": "Mobile",
-      "image": "https://images.unsplash.com/photo-1695048137222-7d00fff9dcc3?auto=format&fit=crop&w=800&q=80"
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSvgCPBUySTN1TjyFl-Lu-XqGoZlDnLDpnbQ&s"
     },
     {
       "id": 2,
@@ -16,7 +16,7 @@
       "price": 29999,
       "stock": 35,
       "category": "Audio",
-      "image": "https://images.unsplash.com/photo-1602679480224-5df3800f9a6b?auto=format&fit=crop&w=800&q=80"
+      "image": "https://www.soundphilereview.com/wp-content/uploads/2022/11/Sony-WH1000XM5-review-6.jpg"
     },
 
     {
@@ -26,7 +26,7 @@
       "price": 124999,
       "stock": 40,
       "category": "Mobile",
-      "image": "https://images.unsplash.com/photo-1675876781590-43195f1a639a?auto=format&fit=crop&w=800&q=80"
+      "image": "https://m.media-amazon.com/images/I/61Q42RN9+9L.jpg"
     },
     {
       "id": 4,
@@ -35,7 +35,7 @@
       "price": 185000,
       "stock": 15,
       "category": "Laptop",
-      "image": "https://images.unsplash.com/photo-1527443224154-d8422010ea2e?auto=format&fit=crop&w=800&q=80"
+      "image": "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/dell-premium/da14250/media-gallery/platinum/touch/notebook-dell-premium-da14250t-sl-gallery-1.psd?fmt=png-alpha&pscan=auto&scl=1&hei=804&wid=1086&qlt=100,1&resMode=sharp2&size=1086,804&chrss=full"
     },
     {
       "id": 5,
@@ -62,7 +62,7 @@
       "price": 75999,
       "stock": 28,
       "category": "Mobile",
-      "image": "https://images.unsplash.com/photo-1696264865806-0bcb7a4182a3?auto=format&fit=crop&w=800&q=80"
+      "image": "https://m.media-amazon.com/images/I/41CV2313l5L._AC_UF894,1000_QL80_.jpg"
     },
     {
       "id": 8,
@@ -80,7 +80,7 @@
       "price": 55999,
       "stock": 18,
       "category": "Gaming",
-      "image": "https://images.unsplash.com/photo-1606813907291-d86efa9b83a2?auto=format&fit=crop&w=800&q=80"
+      "image": "https://i.extremetech.com/imagery/content-types/03STQ0vjWzBdPLYRUHeUFh2/hero-image.fit_lim.v1678673435.jpg"
     },
     {
       "id": 10,

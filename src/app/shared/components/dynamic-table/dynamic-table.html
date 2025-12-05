@@ -1,0 +1,82 @@
+<div class="w-full bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+  <table class="w-full text-left text-sm">
+    <!-- Sticky Header -->
+    <thead
+      class="bg-gray-50/80 backdrop-blur-md text-gray-700 border-b sticky top-0 z-10 shadow-sm"
+    >
+      <tr class="divide-x divide-gray-200">
+        <th
+          *ngFor="let col of columns"
+          class="px-5 py-4 font-semibold cursor-pointer select-none text-gray-700 hover:text-black transition"
+          (click)="col.sortable !== false && sortColumn(col.field)"
+          [style.width]="col.width"
+        >
+          <div class="flex items-center gap-2">
+            {{ col.header }}
+
+            <!-- Sort Icons -->
+            <span *ngIf="sortField === col.field" class="text-xs text-gray-500">
+              <span *ngIf="sortDirection === 'asc'">▲</span>
+              <span *ngIf="sortDirection === 'desc'">▼</span>
+            </span>
+          </div>
+        </th>
+
+        <th class="px-5 py-4 text-center font-semibold">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody class="divide-y divide-gray-100">
+      <tr *ngFor="let row of pagedData" class="hover:bg-gray-50 transition-all duration-150 group">
+        <td *ngFor="let col of columns" class="px-5 py-4 text-gray-700 group-hover:text-gray-900">
+          {{ row[col.field] }}
+        </td>
+
+        <!-- Actions column -->
+        <td class="px-5 py-4 text-center">
+          <button
+            class="px-3 py-1.5 text-xs bg-black hover:bg-gray-800 text-white rounded-lg shadow-sm transition active:scale-95 mr-2"
+            (click)="onAction('edit', row)"
+          >
+            Edit
+          </button>
+
+          <button
+            class="px-3 py-1.5 text-xs border border-gray-400 text-gray-700 hover:bg-gray-100 rounded-lg shadow-sm transition active:scale-95"
+            (click)="onAction('delete', row)"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Pagination Bar -->
+  <div class="flex items-center justify-between px-6 py-4 bg-gray-50 border-t">
+    <button
+      class="px-4 py-2.5 rounded-lg border border-gray-300 bg-white hover:bg-gray-100 disabled:opacity-40 disabled:cursor-not-allowed transition shadow-sm active:scale-95"
+      (click)="changePage(false)"
+      [disabled]="page === 1"
+    >
+      ← Previous
+    </button>
+
+    <div class="flex items-center gap-2 text-gray-700 font-medium">
+      Page
+      <span class="px-3 py-1 rounded-md bg-white border shadow-sm">
+        {{ page }}
+      </span>
+      of
+      <span class="font-semibold">{{ Math.ceil(data.length / pageSize) }}</span>
+    </div>
+
+    <button
+      class="px-4 py-2.5 rounded-lg border border-gray-300 bg-white hover:bg-gray-100 disabled:opacity-40 disabled:cursor-not-allowed transition shadow-sm active:scale-95"
+      (click)="changePage(true)"
+      [disabled]="page >= Math.ceil(data.length / pageSize)"
+    >
+      Next →
+    </button>
+  </div>
+</div>

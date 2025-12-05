@@ -6,14 +6,14 @@ import { debounceTime } from 'rxjs';
 export type SortOption = 'price_asc' | 'price_desc' | 'name_asc' | 'name_desc' | '';
 
 @Component({
-  selector: 'Product-Filter',
+  selector: 'product-filter',
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './product-filter.html',
   styleUrl: './product-filter.css',
 })
 export class ProductFilter implements OnInit {
   @Input() categories: string[] = [];
-  @Output() change = new EventEmitter<{
+  @Output() filterChange = new EventEmitter<{
     search: string;
     category: string;
     stock: string;
@@ -32,7 +32,7 @@ export class ProductFilter implements OnInit {
   }
 
   emitChange() {
-    this.change.emit({
+    this.filterChange.emit({
       search: this.searchControl.value?.trim() || '',
       category: this.category,
       stock: this.stock,

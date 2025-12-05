@@ -7,8 +7,11 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ProductService } from '../../../shared/services/product';
+import { CategoryService } from '../../../shared/services/category';
+import { ICategory } from '../../../shared/interfaces/ICategory';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-product-add',
@@ -21,24 +24,26 @@ export class ProductAdd implements OnInit {
   productImages: any[] = [];
   editMode = false;
   productId: string = '';
-
-  categories = ['Medicine', 'Wellness', 'Cosmetics', 'Supplements'];
+  categories: ICategory[] = [];
 
   constructor(
-    private fb: FormBuilder,
-    private service: ProductService,
-    private route: ActivatedRoute
+    private readonly router: Router,
+    private readonly fb: FormBuilder,
+    private readonly route: ActivatedRoute,
+    private readonly service: ProductService,
+    private readonly categoryService: CategoryService
   ) {}
 
   ngOnInit(): void {
     this.productForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
       sku: ['', [Validators.required]],
+      price: ['', [Validators.required]],
       stock: [null, [Validators.required, Validators.min(0)]],
-      category: ['', Validators.required],
+      categoryid: ['', Validators.required],
       image: [''],
     });
-
+    this.getAllCategoryOptions();
     if (this.route.snapshot.params['id']) {
       this.productId = this.route.snapshot.params['id'];
       this.editMode = true;
@@ -48,9 +53,30 @@ export class ProductAdd implements OnInit {
 
   loadProduct() {
     // Fetch product from API
-    this.service.getById(Number(this.productId)).subscribe((res) => {
-      this.productForm.patchValue(res);
-      this.productImages = Array.isArray(res?.image) ? res.image : res?.image ? [res.image] : [];
+    this.service.getById(this.productId).subscribe((res: any) => {
+      if (res['success']) {
+        let data = res['data'];
+        this.productForm.patchValue(data);
+        let images: any[] = [];
+        if (Array.isArray(data?.image)) {
+          images = data.image;
+        } else if (data?.image) {
+          images = [data.image];
+        }
+        this.productImages = images;
+      }
+    });
+  }
+
+  getAllCategoryOptions() {
+    this.categoryService.getAllCategories().subscribe({
+      next: (res: any) => {
+        if (res['success']) {
+          this.categories = res['data'];
+        } else {
+          this.categories = [];
+        }
+      },
     });
   }
 
@@ -81,11 +107,51 @@ export class ProductAdd implements OnInit {
       ...this.productForm.value,
       images: this.productImages,
     };
-
+    console.log('--Payload:--', payload);
     if (this.editMode) {
-      this.service.update(Number(this.productId), payload).subscribe();
+      this.service.update(this.productId, payload).subscribe({
+        next: (res: any) => {
+          if (res['success']) {
+            this.productForm.reset();
+            this.router.navigateByUrl('/products/list');
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: res?.message,
+            });
+          }
+        },
+        error: (error: any) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: error?.error?.message,
+          });
+        },
+      });
     } else {
-      this.service.create(payload).subscribe();
+      this.service.create(payload).subscribe({
+        next: (res: any) => {
+          if (res['success']) {
+            this.productForm.reset();
+            this.router.navigateByUrl('/products/list');
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: res?.message,
+            });
+          }
+        },
+        error: (error: any) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: error?.error?.message,
+          });
+        },
+      });
     }
   }
 }
