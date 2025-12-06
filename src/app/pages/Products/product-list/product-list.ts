@@ -2,7 +2,6 @@ import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../../../shared/services/product';
 import { IProduct } from '../../../shared/interfaces/IProduct';
-import { catchError, finalize, of } from 'rxjs';
 import { DynamicTable } from '../../../shared/components/dynamic-table/dynamic-table';
 import { Router, RouterModule } from '@angular/router';
 import Swal from 'sweetalert2';
@@ -34,8 +33,8 @@ export class ProductList implements OnInit {
 
   constructor(
     @Inject(ProductService) private readonly service: ProductService,
-    private router: Router,
-    private cdr: ChangeDetectorRef
+    private readonly router: Router,
+    private readonly cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -56,15 +55,13 @@ export class ProductList implements OnInit {
         this.products = data;
         this.loading = false;
         this.cdr.detectChanges();
-        console.log('Products', this.products);
-        console.log('Loading', this.loading);
       });
   }
 
   handleSort(event: any) {
     const { field, direction } = event;
 
-    this.products.sort((a: any, b: any) => {
+    this.products = [...this.products].sort((a: any, b: any) => {
       const A = a[field];
       const B = b[field];
 

@@ -34,6 +34,7 @@
     "@sweetalert2/ngx-sweetalert2": "^14.1.0",
     "apexcharts": "^5.3.6",
     "autoprefixer": "^10.4.22",
+    "flowbite": "^4.0.1",
     "rxjs": "~7.8.0",
     "sweetalert2": "^11.26.3",
     "tslib": "^2.3.0"

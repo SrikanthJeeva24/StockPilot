@@ -1,20 +1,19 @@
-<header class="sticky top-0 z-20 bg-white backdrop-blur-xl shadow-sm">
-  <div class="px-4 md:px-8 py-5 flex items-center justify-between">
-    <h2 class="text-2xl font-semibold text-gray-900 tracking-tight flex items-center gap-3">
-      Products
-      <span class="text-gray-500 text-md font-normal"> ({{ products.length }}) </span>
-    </h2>
+<!-- Page Header (Child Component) -->
+<header class="top-0 bg-white rounded-xl p-4 mb-4 flex items-center justify-between">
+  <h1 class="text-2xl font-semibold tracking-tight">
+    Products <span class="text-gray-400 text-lg">({{ products.length }})</span>
+  </h1>
 
-    <button
-      class="px-5 py-2.5 rounded-xl bg-gray-900 text-white text-sm font-medium shadow-sm hover:bg-gray-800 active:scale-95 transition"
-      [routerLink]="['/products/add']"
-    >
-      + Add New Product
-    </button>
-  </div>
+  <button
+    type="button"
+    [routerLink]="['/products/add']"
+    class="text-white bg-gray-800 hover:bg-gray-700 shadow-md font-medium rounded-lg text-sm px-4 py-2"
+  >
+    + Add New Product
+  </button>
 </header>
 
-<section class="p-1 md:p-2 space-y-8 mx-auto">
+<section class="space-y-6">
   <!-- Loading State -->
   <div *ngIf="loading" class="py-20 flex flex-col items-center gap-3">
     <div
@@ -26,20 +25,81 @@
   <!-- Empty State -->
   <div
     *ngIf="!loading && products.length === 0"
-    class="py-24 text-center flex flex-col items-center gap-3 text-gray-500"
+    class="py-24 text-center flex flex-col items-center gap-3"
   >
     <div class="text-6xl opacity-80">📦</div>
     <p class="text-xl font-semibold text-gray-800">No Products Found</p>
     <p class="text-sm text-gray-400">Try adding a new product.</p>
   </div>
 
-  <!-- Table -->
-  <dynamicTable
-    *ngIf="!loading && products.length > 0"
-    [columns]="columns"
-    [data]="products"
-    (sort)="handleSort($event)"
-    (action)="handleAction($event)"
-  >
-  </dynamicTable>
+  <!-- ========================= -->
+  <!-- DESKTOP TABLE (md+)       -->
+  <!-- ========================= -->
+  <div class="hidden md:block">
+    <dynamicTable
+      *ngIf="!loading && products.length > 0"
+      [columns]="columns"
+      [data]="products"
+      (sort)="handleSort($event)"
+      (action)="handleAction($event)"
+    ></dynamicTable>
+  </div>
+
+  <!-- ========================= -->
+  <!-- MOBILE PRODUCT CARDS      -->
+  <!-- ========================= -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:hidden">
+    <div
+      *ngFor="let item of products"
+      class="bg-white shadow-md rounded-xl overflow-hidden border border-gray-100 flex flex-col"
+    >
+      <!-- Product Image -->
+      <div class="w-full h-40 bg-gray-100 flex items-center justify-center overflow-hidden">
+        <img
+          *ngIf="item.image"
+          [src]="item.image"
+          alt="{{ item.name }}"
+          class="w-full h-full object-contain"
+        />
+
+        <!-- Placeholder if no image -->
+        <div
+          *ngIf="!item.image"
+          class="w-full h-full flex items-center justify-center text-4xl text-gray-400"
+        >
+          📦
+        </div>
+      </div>
+
+      <!-- Card Body -->
+      <div class="p-4 flex flex-col flex-1">
+        <h2 class="text-lg font-semibold text-gray-800 mb-2 truncate">
+          {{ item.name || 'Unnamed Product' }}
+        </h2>
+
+        <div class="text-sm text-gray-600 space-y-1 mb-4">
+          <p><strong>SKU:</strong> {{ item.sku }}</p>
+          <p><strong>Category:</strong> {{ item.category }}</p>
+          <p><strong>Price:</strong> ₹{{ item.price }}</p>
+          <p><strong>Stock:</strong> {{ item.stock }}</p>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex justify-end gap-3 mt-auto pt-2">
+          <button
+            class="px-3 py-1.5 text-xs rounded-lg bg-blue-600 text-white shadow hover:bg-blue-700"
+            (click)="handleAction({ type: 'edit', row: item })"
+          >
+            Edit
+          </button>
+          <button
+            class="px-3 py-1.5 text-xs rounded-lg bg-red-500 text-white shadow hover:bg-red-600"
+            (click)="handleAction({ type: 'delete', row: item })"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
