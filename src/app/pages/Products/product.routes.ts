@@ -19,4 +19,10 @@ export const Product_Routes: Routes = [
       return import('./product-add/product-add').then((m) => m.ProductAdd);
     },
   },
+  {
+    path: 'view/:id',
+    loadComponent() {
+      return import('./product-view/product-view').then((m) => m.ProductView);
+    },
+  },
 ];

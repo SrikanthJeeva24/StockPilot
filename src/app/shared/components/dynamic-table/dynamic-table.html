@@ -110,11 +110,11 @@
           (keydown)="$event.key === 'Enter' && col.sortable !== false && sortColumn(col.field)"
           tabindex="0"
         >
-          <div class="flex items-center">
+          <div class="flex items-center justify-center">
             {{ col.header }}
 
             <!-- Sort Icon -->
-            <div *ngIf="sortField === col.field">
+            <!-- <div *ngIf="sortField === col.field">
               <svg
                 class="w-4 h-4 ms-1"
                 xmlns="http://www.w3.org/2000/svg"
@@ -129,11 +129,11 @@
                   d="m8 15 4 4 4-4m0-6-4-4-4 4"
                 />
               </svg>
-            </div>
+            </div> -->
           </div>
         </th>
 
-        <th scope="col" class="px-6 py-3">Action</th>
+        <th scope="col" class="px-6 py-3 flex items-center justify-center">Action</th>
       </tr>
     </thead>
 
@@ -143,12 +143,21 @@
         class="bg-neutral-primary-soft border-b border-default hover:bg-neutral-secondary-medium"
       >
         <!-- Row Columns -->
-        <td *ngFor="let col of columns" class="px-6 py-4 whitespace-nowrap font-medium">
-          {{ row[col.field] }}
+        <td *ngFor="let col of columns" class="px-6 py-4 whitespace-nowrap">
+          <span
+            *ngIf="col.isLink"
+            class="font-bold cursor-pointer"
+            [routerLink]="formatLink(col.link, row)"
+          >
+            {{ row[col.field] }}
+          </span>
+          <span *ngIf="!col.isLink" class="font-medium">
+            {{ row[col.field] }}
+          </span>
         </td>
 
         <!-- Actions -->
-        <td class="px-6 py-4">
+        <td class="px-6 py-4 flex items-center justify-center">
           <button
             class="font-medium mx-2 text-fg-brand hover:underline"
             (click)="onAction('edit', row)"

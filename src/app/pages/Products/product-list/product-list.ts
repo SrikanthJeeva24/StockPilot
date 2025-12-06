@@ -25,7 +25,7 @@ export class ProductList implements OnInit {
   };
 
   columns = [
-    { field: 'name', header: 'Name', sortable: true },
+    { field: 'name', header: 'Name', sortable: true, isLink: true, link: '/products/view/:id' },
     { field: 'sku', header: 'SKU', sortable: true },
     { field: 'price', header: 'Price', sortable: true },
     { field: 'stock', header: 'Stock', sortable: true },

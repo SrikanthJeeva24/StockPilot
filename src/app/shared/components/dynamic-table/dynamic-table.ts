@@ -1,17 +1,20 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterLink, RouterModule } from '@angular/router';
 
 export interface TableColumn {
   field: string;
   header: string;
   sortable?: boolean;
   width?: string;
+  isLink?: boolean;
+  link?: string;
 }
 
 @Component({
   selector: 'dynamicTable',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './dynamic-table.html',
   styleUrl: './dynamic-table.css',
 })
@@ -43,6 +46,13 @@ export class DynamicTable implements OnChanges {
 
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
+  }
+
+  formatLink(template: string = '', row: any): string {
+    if (!template) return '';
+
+    // Replace all :params using row data
+    return template.replace(/:([a-zA-Z0-9_]+)/g, (_, key) => row[key] ?? '');
   }
 
   // SEARCH
